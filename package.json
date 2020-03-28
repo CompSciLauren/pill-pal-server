@@ -1,11 +1,15 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "mysql": "^2.18.1"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
