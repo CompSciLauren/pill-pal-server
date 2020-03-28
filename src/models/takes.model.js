@@ -14,14 +14,12 @@ const Takes = function(takes) {
 Takes.findByEmail = (UserId, result) => {
   sql.query(`SELECT * FROM Takes WHERE User_Email = ?`, UserId, (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(err, null);
       return;
     }
 
     if (res.length) {
-      console.log('found User: ', res[0]);
-      result(null, res[0]);
+      result(null, res);
       return;
     }
 
