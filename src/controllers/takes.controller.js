@@ -20,7 +20,7 @@ exports.findMedication = (req, res) => {
 
 // Retrieve all Takes info from the database.
 exports.findAll = (req, res) => {
-  User.getAll((err, data) => {
+  Takes.getAll((err, data) => {
     if (err)
       res.status(500).send({
         message:
