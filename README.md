@@ -1,1 +1,1 @@
-# pill-pal-server
+# PillPal Server
