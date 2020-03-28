@@ -30,4 +30,17 @@ Takes.findByEmail = (UserId, result) => {
   });
 };
 
+Takes.getAll = result => {
+  sql.query('SELECT * FROM Takes', (err, res) => {
+    if (err) {
+      console.log('error: ', err);
+      result(null, err);
+      return;
+    }
+
+    console.log('Takes: ', res);
+    result(null, res);
+  });
+};
+
 module.exports = User;
