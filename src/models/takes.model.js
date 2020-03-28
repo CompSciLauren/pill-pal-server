@@ -43,4 +43,4 @@ Takes.getAll = result => {
   });
 };
 
-module.exports = User;
+module.exports = Takes;
