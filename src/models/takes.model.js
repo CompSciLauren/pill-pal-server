@@ -12,7 +12,7 @@ const Takes = function(takes) {
 };
 
 Takes.findByEmail = (UserId, result) => {
-  sql.query(`SELECT * FROM Takes WHERE User_Email = ${UserId}`, (err, res) => {
+  sql.query(`SELECT * FROM Takes WHERE User_Email = ?`, UserId, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(err, null);
