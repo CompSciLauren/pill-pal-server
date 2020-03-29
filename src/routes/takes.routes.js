@@ -9,4 +9,7 @@ module.exports = app => {
 
   // Retrieve a single Customer with email
   app.get('/Takes/:email', Takes.findMedication);
+
+  // Delete an entry with email
+  app.delete('/Takes/:email/:medication', Takes.delete);
 };

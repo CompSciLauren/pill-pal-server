@@ -63,3 +63,24 @@ exports.findAll = (req, res) => {
     else res.send(data);
   });
 };
+
+// Delete an entry with the specified Email in the request
+// Any deletion requests should not have any 'ticks' around email key
+exports.delete = (req, res) => {
+  Takes.remove(req.params.email, req.params.medication, (err, data) => {
+    if (err) {
+      if (err.kind === 'not_found') {
+        res.status(404).send({
+          message: `Not found User with Email ${req.params.email} and Medication ${req.params.medication}.`,
+        });
+      } else {
+        res.status(500).send({
+          message:
+            'Could not delete any medication for User with Email ' +
+            req.params.email,
+        });
+      }
+    } else
+      res.send({ message: `A medication for User was deleted successfully!` });
+  });
+};

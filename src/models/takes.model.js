@@ -52,4 +52,28 @@ Takes.getAll = result => {
   });
 };
 
+Takes.remove = (email, medication, result) => {
+  let values = [email, medication];
+  sql.query(
+    'DELETE FROM Takes WHERE User_Email = ? AND Medication_Name = ?',
+    values,
+    (err, res) => {
+      if (err) {
+        console.log('error: ', err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        // not found User with the id
+        result({ kind: 'not_found' }, null);
+        return;
+      }
+
+      console.log('Deleted User with Email: ', email);
+      result(null, res);
+    }
+  );
+};
+
 module.exports = Takes;
