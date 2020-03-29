@@ -11,6 +11,17 @@ const Takes = function(takes) {
   this.Refills = takes.Refills;
 };
 
+Takes.create = (newEntry, result) => {
+  sql.query('INSERT INTO Takes SET ?', newEntry, (err, res) => {
+    if (err) {
+      result(err, null);
+      return;
+    }
+
+    result(null, { id: res.insertId, ...newEntry });
+  });
+};
+
 Takes.findByEmail = (UserId, result) => {
   sql.query(`SELECT * FROM Takes WHERE User_Email = ?`, UserId, (err, res) => {
     if (err) {

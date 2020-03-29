@@ -1,6 +1,9 @@
 module.exports = app => {
   const Takes = require('../controllers/takes.controller.js');
 
+  // Create a new Takes entry
+  app.post('/Takes', Takes.create);
+
   // Retrieve all Takes info
   app.get('/Takes', Takes.findAll);
 
