@@ -10,6 +10,9 @@ module.exports = app => {
   // Retrieve a single Customer with email
   app.get('/Takes/:email', Takes.findMedication);
 
-  // Delete an entry with email
+  // Delete one medication with email and name of medication
   app.delete('/Takes/:email/:medication', Takes.delete);
+
+  // Delete all medications with email
+  app.delete('/Takes/:email', Takes.deleteAll);
 };

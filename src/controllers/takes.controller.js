@@ -64,7 +64,7 @@ exports.findAll = (req, res) => {
   });
 };
 
-// Delete an entry with the specified Email in the request
+// Delete one medication with the specified Email in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
   Takes.remove(req.params.email, req.params.medication, (err, data) => {
@@ -82,5 +82,28 @@ exports.delete = (req, res) => {
       }
     } else
       res.send({ message: `A medication for User was deleted successfully!` });
+  });
+};
+
+// Delete all medications with the specified Email in the request
+// Any deletion requests should not have any 'ticks' around email key
+exports.deleteAll = (req, res) => {
+  Takes.removeAll(req.params.email, (err, data) => {
+    if (err) {
+      if (err.kind === 'not_found') {
+        res.status(404).send({
+          message: `Not found User with Email ${req.params.email}.`,
+        });
+      } else {
+        res.status(500).send({
+          message:
+            'Could not delete medications for User with Email ' +
+            req.params.email,
+        });
+      }
+    } else
+      res.send({
+        message: `All medications for User were deleted successfully!`,
+      });
   });
 };
