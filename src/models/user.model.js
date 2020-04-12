@@ -4,8 +4,8 @@
 const sql = require('./db.js');
 
 // constructor
-const User = function(user) {
-  this.Email = user.Email;
+const User = function (user) {
+  this.ID = user.ID;
   this.Name = user.Name;
   this.Password = user.Password;
   this.Phone_Number = user.Phone_Number;
@@ -24,8 +24,8 @@ User.create = (newUser, result) => {
   });
 };
 
-User.findByEmail = (UserId, result) => {
-  sql.query(`SELECT * FROM User WHERE Email = ?`, UserId, (err, res) => {
+User.findByID = (UserId, result) => {
+  sql.query(`SELECT * FROM User WHERE ID = ?`, UserId, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(err, null);
@@ -43,7 +43,7 @@ User.findByEmail = (UserId, result) => {
   });
 };
 
-User.getAll = result => {
+User.getAll = (result) => {
   sql.query('SELECT * FROM User', (err, res) => {
     if (err) {
       console.log('error: ', err);
@@ -56,8 +56,8 @@ User.getAll = result => {
   });
 };
 
-User.remove = (email, result) => {
-  sql.query('DELETE FROM User WHERE Email = ?', email, (err, res) => {
+User.remove = (id, result) => {
+  sql.query('DELETE FROM User WHERE ID = ?', id, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);
@@ -70,7 +70,7 @@ User.remove = (email, result) => {
       return;
     }
 
-    console.log('Deleted User with Email: ', email);
+    console.log('Deleted User with ID: ', id);
     result(null, res);
   });
 };

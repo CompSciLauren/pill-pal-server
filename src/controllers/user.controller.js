@@ -15,20 +15,22 @@ exports.create = (req, res) => {
   // Create a User
   // JSON example of creating a user
   //  {
-  //   "Email": "email@gmail.com",
+  //   "ID": 0,
   //   "Name": "Jeff Bean",
   //   "Password": "secret",
   //   "Phone_Number": 7775550000
   //  }
 
   const user = new User({
+    ID: req.body.ID,
     Email: req.body.Email,
     Name: req.body.Name,
     Password: req.body.Password,
     Phone_Number: req.body.Phone_Number,
   });
   console.log(
-    '%s,%s,%s,%s',
+    '%s,%s,%s,%s,%s',
+    user.ID,
     user.Email,
     user.Name,
     user.Password,
@@ -59,35 +61,35 @@ exports.findAll = (req, res) => {
 // Find a single User with a Email
 // Find requestes need to be surrounded by single tick 'email@gmail.com'
 exports.findUser = (req, res) => {
-  console.log('look:', req.params.email);
-  User.findByEmail(req.params.email, (err, data) => {
+  console.log('look:', req.params.id);
+  User.findByID(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `No User found with email ${req.params.email}.`,
+          message: `No User found with ID ${req.params.id}.`,
         });
       } else {
         res.status(500).send({
-          message: 'Error retrieving User with email ' + req.params.email,
+          message: 'Error retrieving User with ID ' + req.params.id,
         });
       }
     } else res.send(data);
   });
 };
 
-// Delete a User with the specified Email in the request
+// Delete a User with the specified ID in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
-  console.log(req.params.email);
-  User.remove(req.params.email, (err, data) => {
+  console.log(req.params.id);
+  User.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `Not found User with Email ${req.params.email}.`,
+          message: `Not found User with ID ${req.params.id}.`,
         });
       } else {
         res.status(500).send({
-          message: 'Could not delete User with Email ' + req.params.email,
+          message: 'Could not delete User with ID ' + req.params.id,
         });
       }
     } else res.send({ message: `User was deleted successfully!` });
