@@ -25,38 +25,36 @@ exports.create = (req, res) => {
     ID: req.body.ID,
     Email: req.body.Email,
   });
-  console.log(
-    '%s,%s',
-    medication.ID,
-    medication.Email,
-  );
+  console.log('%s,%s', medication.ID, medication.Email);
 
-// Retrieve all Medications from the database.
-exports.findAll = (req, res) => {
-  Medication.getAll((err, data) => {
-    if (err)
-      res.status(500).send({
-        message: err.message || 'Some error occurred while retrieving medications.',
-      });
-    else res.send(data);
-  });
-};
-
-// Find a single Medication with a Email
-// Find requestes need to be surrounded by single tick 'email@gmail.com'
-exports.findMedication = (req, res) => {
-  console.log('look:', req.params.id);
-  Medication.findByID(req.params.id, (err, data) => {
-    if (err) {
-      if (err.kind === 'not_found') {
-        res.status(404).send({
-          message: `No Medication found with ID ${req.params.id}.`,
-        });
-      } else {
+  // Retrieve all Medications from the database.
+  exports.findAll = (req, res) => {
+    Medication.getAll((err, data) => {
+      if (err)
         res.status(500).send({
-          message: 'Error retrieving Medication with ID ' + req.params.id,
+          message:
+            err.message || 'Some error occurred while retrieving medications.',
         });
-      }
-    } else res.send(data);
-  });
+      else res.send(data);
+    });
+  };
+
+  // Find a single Medication with a Email
+  // Find requestes need to be surrounded by single tick 'email@gmail.com'
+  exports.findMedication = (req, res) => {
+    console.log('look:', req.params.id);
+    Medication.findByID(req.params.id, (err, data) => {
+      if (err) {
+        if (err.kind === 'not_found') {
+          res.status(404).send({
+            message: `No Medication found with ID ${req.params.id}.`,
+          });
+        } else {
+          res.status(500).send({
+            message: 'Error retrieving Medication with ID ' + req.params.id,
+          });
+        }
+      } else res.send(data);
+    });
+  };
 };
