@@ -26,7 +26,7 @@ LogEntry.create = (newLogEntry, result) => {
 
 LogEntry.getLog = (user_id, date, result) => {
   sql.query(
-    `SELECT * FROM Log WHERE User_ID = ? AND Date = ?`,
+    `SELECT * FROM Log_BMI WHERE User_ID = ? AND Date = ?`,
     [user_id, date],
     (err, res) => {
       if (err) {
