@@ -4,9 +4,9 @@
 const sql = require('./db.js');
 
 // constructor
-const Takes = function(takes) {
-  this.User_Email = takes.User_Email;
-  this.Medication_Name = takes.Medication_Name;
+const Takes = function (takes) {
+  this.User_ID = takes.User_ID;
+  this.Medication_ID = takes.Medication_ID;
   this.Amount_Prescribed = takes.Amount_Prescribed;
   this.Refills = takes.Refills;
 };
@@ -22,8 +22,8 @@ Takes.create = (newEntry, result) => {
   });
 };
 
-Takes.findByEmail = (UserId, result) => {
-  sql.query(`SELECT * FROM Takes WHERE User_Email = ?`, UserId, (err, res) => {
+Takes.findByUser_ID = (UserId, result) => {
+  sql.query(`SELECT * FROM Takes WHERE User_ID = ?`, UserId, (err, res) => {
     if (err) {
       result(err, null);
       return;
@@ -39,7 +39,7 @@ Takes.findByEmail = (UserId, result) => {
   });
 };
 
-Takes.getAll = result => {
+Takes.getAll = (result) => {
   sql.query('SELECT * FROM Takes', (err, res) => {
     if (err) {
       console.log('error: ', err);
@@ -52,10 +52,10 @@ Takes.getAll = result => {
   });
 };
 
-Takes.remove = (email, medication, result) => {
-  let values = [email, medication];
+Takes.remove = (user_id, medication_id, result) => {
+  let values = [user_id, medication_id];
   sql.query(
-    'DELETE FROM Takes WHERE User_Email = ? AND Medication_Name = ?',
+    'DELETE FROM Takes WHERE User_ID = ? AND Medication_ID = ?',
     values,
     (err, res) => {
       if (err) {
@@ -70,14 +70,14 @@ Takes.remove = (email, medication, result) => {
         return;
       }
 
-      console.log('Deleted User with Email: ', email);
+      console.log('Deleted User with ID: ', user_id);
       result(null, res);
     }
   );
 };
 
-Takes.removeAll = (email, result) => {
-  sql.query('DELETE FROM Takes WHERE User_Email = ?', email, (err, res) => {
+Takes.removeAll = (user_id, result) => {
+  sql.query('DELETE FROM Takes WHERE User_ID = ?', user_id, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);
@@ -90,7 +90,7 @@ Takes.removeAll = (email, result) => {
       return;
     }
 
-    console.log('Deleted User with Email: ', email);
+    console.log('Deleted User with ID: ', user_id);
     result(null, res);
   });
 };

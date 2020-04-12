@@ -11,15 +11,15 @@ exports.create = (req, res) => {
   // Create a Takes entry
   // JSON example of creating a Takes entry
   //  {
-  //   "Email": "email@gmail.com",
+  //   "User_ID": 0,
   //   "Name": "Jeff Bean",
   //   "Password": "secret",
   //   "Phone_Number": 7775550000
   //  }
 
   const takes = new Takes({
-    User_Email: req.body.User_Email,
-    Medication_Name: req.body.Medication_Name,
+    User_ID: req.body.User_ID,
+    Medication_ID: req.body.Medication_ID,
     Amount_Prescribed: req.body.Amount_Prescribed,
     Refills: req.body.Refills,
   });
@@ -34,18 +34,18 @@ exports.create = (req, res) => {
   });
 };
 
-// Find a single User's current medication via their email address
+// Find a single User's current medication via their user ID
 // Find requests need to be surrounded by single tick 'email@gmail.com'
 exports.findMedication = (req, res) => {
-  Takes.findByEmail(req.params.email, (err, data) => {
+  Takes.findByUser_ID(req.params.user_id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `No User found with email ${req.params.email}.`,
+          message: `No User found with ID ${req.params.user_id}.`,
         });
       } else {
         res.status(500).send({
-          message: 'Error retrieving User with email ' + req.params.email,
+          message: 'Error retrieving User with ID ' + req.params.user_id,
         });
       }
     } else res.send(data);
@@ -67,17 +67,17 @@ exports.findAll = (req, res) => {
 // Delete one medication with the specified Email in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
-  Takes.remove(req.params.email, req.params.medication, (err, data) => {
+  Takes.remove(req.params.user_id, req.params.medication_id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `Not found User with Email ${req.params.email} and Medication ${req.params.medication}.`,
+          message: `Not found User with ID ${req.params.user_id} and Medication ID ${req.params.medication_id}.`,
         });
       } else {
         res.status(500).send({
           message:
-            'Could not delete any medication for User with Email ' +
-            req.params.email,
+            'Could not delete any medication for User with ID ' +
+            req.params.user_id,
         });
       }
     } else
@@ -88,17 +88,17 @@ exports.delete = (req, res) => {
 // Delete all medications with the specified Email in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.deleteAll = (req, res) => {
-  Takes.removeAll(req.params.email, (err, data) => {
+  Takes.removeAll(req.params.user_id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `Not found User with Email ${req.params.email}.`,
+          message: `Not found User with ID ${req.params.user_id}.`,
         });
       } else {
         res.status(500).send({
           message:
-            'Could not delete medications for User with Email ' +
-            req.params.email,
+            'Could not delete medications for User with ID ' +
+            req.params.user_id,
         });
       }
     } else

@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app) => {
   const Takes = require('../controllers/takes.controller.js');
 
   // Create a new Takes entry
@@ -7,12 +7,12 @@ module.exports = app => {
   // Retrieve all Takes info
   app.get('/Takes', Takes.findAll);
 
-  // Retrieve a single Customer with email
-  app.get('/Takes/:email', Takes.findMedication);
+  // Retrieve a single Customer with user_id
+  app.get('/Takes/:user_id', Takes.findMedication);
 
-  // Delete one medication with email and name of medication
-  app.delete('/Takes/:email/:medication', Takes.delete);
+  // Delete one medication with user_id and name of medication
+  app.delete('/Takes/:user_id/:medication_id', Takes.delete);
 
-  // Delete all medications with email
-  app.delete('/Takes/:email', Takes.deleteAll);
+  // Delete all medications with user_id
+  app.delete('/Takes/:user_id', Takes.deleteAll);
 };
