@@ -10,14 +10,14 @@ module.exports = (app) => {
   app.get('/Log_BMI', Log_BMI.findAll);
 
   // Retrieve all Logs from User
-  app.get('/Log_BMI/:email', Log_BMI.getAllLogs);
+  app.get('/Log_BMI/:user_id', Log_BMI.getAllLogs);
 
-  // Retrieve a single Log with email and date
-  app.get('Log_BMI/:email/:date', Log_BMI.getLog);
+  // Retrieve a single Log with user_id and date
+  app.get('Log_BMI/:user_id/:date', Log_BMI.getLog);
 
-  // Retrieve a single Log with email and date
-  app.put('/Log_BMI/:email/:date', Log_BMI.update);
+  // Retrieve a single Log with user_id and date
+  app.put('/Log_BMI/:user_id/:date', Log_BMI.update);
 
-  // Delete a Log with email and date
-  app.delete('/Log_BMI/:email/:date', Log_BMI.delete);
+  // Delete a Log with user_id and date
+  app.delete('/Log_BMI/:user_id/:date', Log_BMI.delete);
 };

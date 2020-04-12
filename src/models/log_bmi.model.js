@@ -5,7 +5,7 @@ const sql = require('./db.js');
 
 // constructor
 const LogEntry = function (entry) {
-  this.User_Email = entry.User_Email;
+  this.User_ID = entry.User_ID;
   this.Date = entry.Date;
   this.Height = entry.Height;
   this.Weight = entry.Weight;
@@ -24,10 +24,10 @@ LogEntry.create = (newLogEntry, result) => {
   });
 };
 
-LogEntry.getLog = (email, date, result) => {
+LogEntry.getLog = (user_id, date, result) => {
   sql.query(
-    `SELECT * FROM Log WHERE User_Email = ? AND Date = ?`,
-    [email, date],
+    `SELECT * FROM Log WHERE User_ID = ? AND Date = ?`,
+    [user_id, date],
     (err, res) => {
       if (err) {
         console.log('error: ', err);
@@ -47,8 +47,8 @@ LogEntry.getLog = (email, date, result) => {
   );
 };
 
-LogEntry.getAllLogs = (email, result) => {
-  sql.query('SELECT * FROM Log_BMI WHERE User_Email = ?', email, (err, res) => {
+LogEntry.getAllLogs = (user_id, result) => {
+  sql.query('SELECT * FROM Log_BMI WHERE User_ID = ?', user_id, (err, res) => {
     if (err) {
       console.log('error: ', err);
       result(null, err);
@@ -60,10 +60,10 @@ LogEntry.getAllLogs = (email, result) => {
   });
 };
 
-LogEntry.update = (email, date, newLog) => {
+LogEntry.update = (user_id, date, newLog) => {
   sql.query(
-    'UPDATE Log_BMI SET User_Email = ?, Date = ?, Height = ? WHERE User_Email = ? and Date = ?',
-    [newLog.User_Email, newLog.Date, newLog.Height, newLog.Weight, email, date],
+    'UPDATE Log_BMI SET User_ID = ?, Date = ?, Height = ? WHERE User_ID = ? and Date = ?',
+    [newLog.User_ID, newLog.Date, newLog.Height, newLog.Weight, user_id, date],
     (err, res) => {
       if (err) {
         console.log('error: ', err);
@@ -72,7 +72,7 @@ LogEntry.update = (email, date, newLog) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Log with the email and date
+        // not found Log with the user_id and date
         result({ kind: 'not_found' }, null);
         return;
       }
@@ -83,10 +83,10 @@ LogEntry.update = (email, date, newLog) => {
   );
 };
 
-LogEntry.remove = (email, date, result) => {
+LogEntry.remove = (user_id, date, result) => {
   sql.query(
-    'DELETE FROM Log_BMI WHERE User_Email = ? AND Date = ?',
-    [email, date],
+    'DELETE FROM Log_BMI WHERE User_ID = ? AND Date = ?',
+    [user_id, date],
     (err, res) => {
       if (err) {
         console.log('error: ', err);
@@ -95,12 +95,12 @@ LogEntry.remove = (email, date, result) => {
       }
 
       if (res.affectedRows == 0) {
-        // not found Log with the email
+        // not found Log with the user_id
         result({ kind: 'not_found' }, null);
         return;
       }
 
-      console.log('Deleted Log with Email: ', email);
+      console.log('Deleted Log with Email: ', user_id);
       result(null, res);
     }
   );

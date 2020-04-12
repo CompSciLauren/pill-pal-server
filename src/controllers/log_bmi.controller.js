@@ -40,18 +40,18 @@ exports.create = (req, res) => {
 // Find a single Log with a Email and Date
 // Find requestes need to be surrounded by single tick 'email@gmail.com'
 exports.getLog = (req, res) => {
-  console.log('getLog - %s,%s', req.params.email, req.params.date);
-  LogEntry.getLog(req.params.email, req.params.Date, (err, data) => {
+  console.log('getLog - %s,%s', req.params.user_id, req.params.date);
+  LogEntry.getLog(req.params.user_id, req.params.Date, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `No Log found with email ${req.params.email} and date ${req.params.date}.`,
+          message: `No Log found with user ID ${req.params.user_id} and date ${req.params.date}.`,
         });
       } else {
         res.status(500).send({
           message:
-            'Error retrieving Log with email ' +
-            req.params.email +
+            'Error retrieving Log with user ID ' +
+            req.params.user_id +
             'and date' +
             req.params.date,
         });
@@ -62,8 +62,8 @@ exports.getLog = (req, res) => {
 
 // Retrieve all Logs from the database.
 exports.getAllLogs = (req, res) => {
-  console.log('getAllLogs - %s,%s', req.params.email, req.params.date);
-  LogEntry.getAllLogs(req.param.email, (err, data) => {
+  console.log('getAllLogs - %s,%s', req.params.user_id, req.params.date);
+  LogEntry.getAllLogs(req.param.user_id, (err, data) => {
     if (err)
       res.status(500).send({
         message: err.message || 'Some error occurred while retrieving logs.',
@@ -81,20 +81,20 @@ exports.update = (req, res) => {
   }
 
   LogEntry.update(
-    req.params.email,
+    req.params.user_id,
     req.params.date,
     new Customer(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === 'not_found') {
           res.status(404).send({
-            message: `Not found Log with email ${req.params.email} and date ${req.params.date}.`,
+            message: `Not found Log with user ID ${req.params.user_id} and date ${req.params.date}.`,
           });
         } else {
           res.status(500).send({
             message:
-              'Error updating Log with email ' +
-              req.params.email +
+              'Error updating Log with user ID ' +
+              req.params.user_id +
               'and date' +
               req.params.date,
           });
@@ -105,18 +105,18 @@ exports.update = (req, res) => {
 };
 
 // Delete a Log with the specified Email in the request
-// Any deletion requests should not have any 'ticks' around email key
+// Any deletion requests should not have any 'ticks' around user_id key
 exports.delete = (req, res) => {
-  console.log(req.params.email);
-  LogEntry.remove(req.params.email, req.params.date, (err, data) => {
+  console.log(req.params.user_id);
+  LogEntry.remove(req.params.user_id, req.params.date, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
         res.status(404).send({
-          message: `Not found User with Email ${req.params.email}.`,
+          message: `Not found User with Email ${req.params.user_id}.`,
         });
       } else {
         res.status(500).send({
-          message: 'Could not delete Log with Email ' + req.params.email,
+          message: 'Could not delete Log with Email ' + req.params.user_id,
         });
       }
     } else res.send({ message: `Log: was deleted successfully!` });
