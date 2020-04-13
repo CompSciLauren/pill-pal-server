@@ -23,20 +23,25 @@ Takes.create = (newEntry, result) => {
 };
 
 Takes.findByUser_ID = (UserId, result) => {
-  sql.query(`SELECT * FROM Takes WHERE User_ID = ?`, UserId, (err, res) => {
-    if (err) {
-      result(err, null);
-      return;
-    }
+  sql.query(
+    `SELECT Display_Name FROM Medication WHERE ID IN ( SELECT Medication_ID FROM Takes WHERE User_ID = ?)`,
+    UserId,
+    (err, res) => {
+      if (err) {
+        console.log('error: ', err);
+        result(err, null);
+        return;
+      }
 
-    if (res.length) {
-      result(null, res);
-      return;
-    }
+      if (res.length) {
+        result(null, res);
+        return;
+      }
 
-    // not found User with the id
-    result({ kind: 'not_found' }, null);
-  });
+      // not found User with the id
+      result({ kind: 'not_found' }, null);
+    }
+  );
 };
 
 Takes.getAll = (result) => {
