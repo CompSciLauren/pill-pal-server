@@ -62,7 +62,7 @@ exports.getLog = (req, res) => {
 
 // Retrieve all Logs from the database.
 exports.getAllLogs = (req, res) => {
-  console.log('getAllLogs - %s,%s', req.params.user_id, req.params.date);
+  console.log('getAllLogs - %s', req.params.user_id);
   Log_Symptoms.getAllLogs(req.param.user_id, (err, data) => {
     if (err)
       res.status(500).send({
