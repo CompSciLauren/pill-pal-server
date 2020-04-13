@@ -63,7 +63,6 @@ exports.findAll = (req, res) => {
 // Find a single Medication with a Email
 // Find requestes need to be surrounded by single tick 'email@gmail.com'
 exports.findMedication = (req, res) => {
-  console.log('look:', req.params.id);
   Medication.findByID(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
