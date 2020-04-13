@@ -11,7 +11,6 @@ exports.create = (req, res) => {
       message: 'Content can not be empty!',
     });
   }
-  console.log(req.body);
   // Create a User
   // JSON example of creating a user
   //  {
@@ -28,14 +27,6 @@ exports.create = (req, res) => {
     Password: req.body.Password,
     Phone_Number: req.body.Phone_Number,
   });
-  console.log(
-    '%s,%s,%s,%s,%s',
-    user.ID,
-    user.Email,
-    user.Name,
-    user.Password,
-    user.Phone_Number
-  );
 
   // Save User in the database
   User.create(user, (err, data) => {
@@ -79,7 +70,6 @@ exports.findUser = (req, res) => {
 // Delete a User with the specified ID in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
-  console.log(req.params.id);
   User.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {

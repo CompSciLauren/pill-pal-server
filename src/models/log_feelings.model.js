@@ -32,7 +32,6 @@ Log_Feelings.findByID = (Log_FeelingsId, result) => {
     Log_FeelingsId,
     (err, res) => {
       if (err) {
-        console.log(err);
         result(err, null);
         return;
       }

@@ -11,7 +11,6 @@ exports.create = (req, res) => {
       message: 'Content can not be empty!',
     });
   }
-  console.log(req.body);
   // Create a Medication
   // JSON example of creating a medication
   //  {
@@ -28,14 +27,6 @@ exports.create = (req, res) => {
     Password: req.body.Password,
     Phone_Number: req.body.Phone_Number,
   });
-  console.log(
-    '%s,%s,%s,%s,%s',
-    medication.ID,
-    medication.Email,
-    medication.Name,
-    medication.Password,
-    medication.Phone_Number
-  );
 
   // Save Medication in the database
   Medication.create(medication, (err, data) => {
@@ -81,7 +72,6 @@ exports.findMedication = (req, res) => {
 // Delete a Medication with the specified ID in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
-  console.log(req.params.id);
   Medication.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {

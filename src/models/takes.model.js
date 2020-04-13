@@ -32,7 +32,6 @@ Takes.findByUser_ID = (UserId, result) => {
     UserId,
     (err, res) => {
       if (err) {
-        console.log('error: ', err);
         result(err, null);
         return;
       }
@@ -51,12 +50,10 @@ Takes.findByUser_ID = (UserId, result) => {
 Takes.getAll = (result) => {
   sql.query('SELECT * FROM Takes', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
 
-    console.log('Takes: ', res);
     result(null, res);
   });
 };
@@ -68,7 +65,6 @@ Takes.remove = (user_id, medication_id, result) => {
     values,
     (err, res) => {
       if (err) {
-        console.log('error: ', err);
         result(null, err);
         return;
       }
@@ -79,7 +75,6 @@ Takes.remove = (user_id, medication_id, result) => {
         return;
       }
 
-      console.log('Deleted User with ID: ', user_id);
       result(null, res);
     }
   );
@@ -88,7 +83,6 @@ Takes.remove = (user_id, medication_id, result) => {
 Takes.removeAll = (user_id, result) => {
   sql.query('DELETE FROM Takes WHERE User_ID = ?', user_id, (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
@@ -99,7 +93,6 @@ Takes.removeAll = (user_id, result) => {
       return;
     }
 
-    console.log('Deleted User with ID: ', user_id);
     result(null, res);
   });
 };

@@ -12,12 +12,10 @@ const Medication = function (medication) {
 Medication.create = (newMedication, result) => {
   sql.query('INSERT INTO Medication SET ?', newMedication, (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(err, null);
       return;
     }
 
-    console.log('created Medication: ', { id: res.insertId, ...newMedication });
     result(null, { id: res.insertId, ...newMedication });
   });
 };
@@ -28,13 +26,11 @@ Medication.findByID = (MedicationId, result) => {
     MedicationId,
     (err, res) => {
       if (err) {
-        console.log('error: ', err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log('found Medication: ', res);
         result(null, res);
         return;
       }
@@ -48,12 +44,10 @@ Medication.findByID = (MedicationId, result) => {
 Medication.getAll = (result) => {
   sql.query('SELECT * FROM Medication', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
 
-    console.log('Medication: ', res);
     result(null, res);
   });
 };
@@ -61,7 +55,6 @@ Medication.getAll = (result) => {
 Medication.remove = (id, result) => {
   sql.query('DELETE FROM Medication WHERE ID = ?', id, (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
@@ -72,7 +65,6 @@ Medication.remove = (id, result) => {
       return;
     }
 
-    console.log('Deleted Medication with ID: ', id);
     result(null, res);
   });
 };

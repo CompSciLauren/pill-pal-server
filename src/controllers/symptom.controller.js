@@ -11,7 +11,6 @@ exports.create = (req, res) => {
       message: 'Content can not be empty!',
     });
   }
-  console.log(req.body);
   // Create a Symptom
   // JSON example of creating a symptom
   //  {
@@ -28,14 +27,6 @@ exports.create = (req, res) => {
     Password: req.body.Password,
     Phone_Number: req.body.Phone_Number,
   });
-  console.log(
-    '%s,%s,%s,%s,%s',
-    symptom.ID,
-    symptom.Email,
-    symptom.Name,
-    symptom.Password,
-    symptom.Phone_Number
-  );
 
   // Save Symptom in the database
   Symptom.create(symptom, (err, data) => {
@@ -81,7 +72,6 @@ exports.findSymptom = (req, res) => {
 // Delete a Symptom with the specified ID in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
-  console.log(req.params.id);
   Symptom.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
