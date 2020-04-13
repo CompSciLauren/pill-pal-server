@@ -18,6 +18,7 @@ require('./routes/user.routes.js')(app);
 require('./routes/takes.routes.js')(app);
 require('./routes/log_bmi.routes.js')(app);
 require('./routes/medication.routes.js')(app);
+require('./routes/symptom.routes.js')(app);
 require('./routes/log_symptoms.routes.js')(app);
 require('./routes/log_feelings.routes.js')(app);
 
