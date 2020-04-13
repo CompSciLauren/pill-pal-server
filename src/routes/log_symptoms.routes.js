@@ -13,6 +13,9 @@ module.exports = (app) => {
   // Retrieve a single Customer with ID
   app.get('/Log_Symptoms/:id', Log_Symptoms.findByID);
 
+  // Retrieve user's symptoms for a specific day
+  app.get('/Log_Symptoms/:id/:date', Log_Symptoms.findByIDAndDate);
+
   // Delete a Customer with ID
   app.delete('/Log_Symptoms/:id', Log_Symptoms.delete);
 };

@@ -78,6 +78,28 @@ exports.findByID = (req, res) => {
   });
 };
 
+// Find a single Log_Symptoms with a Email
+// Find requestes need to be surrounded by single tick 'email@gmail.com'
+exports.findByIDAndDate = (req, res) => {
+  Log_Symptoms.findByIDAndDate(req.params.id, req.params.date, (err, data) => {
+    if (err) {
+      if (err.kind === 'not_found') {
+        res.status(404).send({
+          message: `No Log_Symptoms found with ID ${req.params.id} and date ${req.params.date}.`,
+        });
+      } else {
+        res.status(500).send({
+          message:
+            'Error retrieving Log_Symptoms with ID ' +
+            req.params.id +
+            ' and date ' +
+            req.params.date,
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // Delete a Log_Symptoms with the specified ID in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {

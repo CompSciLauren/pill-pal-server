@@ -47,6 +47,33 @@ Log_Symptoms.findByID = (Log_SymptomsId, result) => {
   );
 };
 
+Log_Symptoms.findByIDAndDate = (Log_SymptomsId, Log_SymptomsDate, result) => {
+  sql.query(
+    `SELECT Log_Symptoms.User_ID, Log_Symptoms.Date, Log_Symptoms.Symptom_ID, Log_Symptoms.Symptom_Intensity, Symptom.Display_Name
+    FROM Log_Symptoms
+    JOIN Symptom
+    ON Symptom.ID = Log_Symptoms.Symptom_ID
+    WHERE Log_Symptoms.User_ID = ?
+    AND Log_Symptoms.Date = ?`,
+    [Log_SymptomsId, Log_SymptomsDate],
+    (err, res) => {
+      if (err) {
+        console.log('ERROR:', err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        result(null, res);
+        return;
+      }
+
+      // not found Log_Symptoms with the id
+      result({ kind: 'not_found' }, null);
+    }
+  );
+};
+
 Log_Symptoms.getAll = (result) => {
   sql.query('SELECT * FROM Log_Symptoms', (err, res) => {
     if (err) {
