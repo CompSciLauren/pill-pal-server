@@ -47,6 +47,32 @@ Log_Feelings.findByID = (Log_FeelingsId, result) => {
   );
 };
 
+Log_Feelings.findByIDAndDate = (Log_FeelingsId, Log_FeelingsDate, result) => {
+  sql.query(
+    `SELECT Log_Feelings.User_ID, Log_Feelings.Date, Log_Feelings.Feeling_ID, Log_Feelings.Feeling_Intensity, Feeling.Display_Name
+    FROM Log_Feelings
+    JOIN Feeling
+    ON Feeling.ID = Log_Feelings.Feeling_ID
+    WHERE Log_Feelings.User_ID = ?
+    AND Log_Feelings.Date = ?`,
+    [Log_FeelingsId, Log_FeelingsDate],
+    (err, res) => {
+      if (err) {
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        result(null, res);
+        return;
+      }
+
+      // not found Log_Feelings with the id
+      result({ kind: 'not_found' }, null);
+    }
+  );
+};
+
 Log_Feelings.getAll = (result) => {
   sql.query('SELECT * FROM Log_Feelings', (err, res) => {
     if (err) {
