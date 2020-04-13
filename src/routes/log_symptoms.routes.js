@@ -4,20 +4,15 @@
 module.exports = (app) => {
   const Log_Symptoms = require('../controllers/log_symptoms.controller.js');
 
-  // Create a new User
+  // Create a new Log_Symptoms
   app.post('/Log_Symptoms', Log_Symptoms.create);
 
+  // Retrieve all Log_Symptomss
   app.get('/Log_Symptoms', Log_Symptoms.findAll);
 
-  // Retrieve all Logs from User
-  app.get('/Log_Symptoms/:user_id', Log_Symptoms.getAllLogs);
+  // Retrieve a single Customer with ID
+  app.get('/Log_Symptoms/:id', Log_Symptoms.findLog_Symptoms);
 
-  // Retrieve a single Log with user_id and date
-  app.get('Log_Symptoms/:user_id/:date', Log_Symptoms.getLog);
-
-  // Update a single Log with user_id and date
-  app.put('/Log_Symptoms/:user_id/:date', Log_Symptoms.update);
-
-  // Delete a Log with user_id and date
-  app.delete('/Log_Symptoms/:user_id/:date', Log_Symptoms.delete);
+  // Delete a Customer with ID
+  app.delete('/Log_Symptoms/:id', Log_Symptoms.delete);
 };
