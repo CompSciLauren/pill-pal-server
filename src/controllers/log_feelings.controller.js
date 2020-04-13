@@ -70,6 +70,7 @@ exports.findLog_Feelings = (req, res) => {
           message: `No Log_Feelings found with ID ${req.params.id}.`,
         });
       } else {
+        console.log('LOOK:', err);
         res.status(500).send({
           message: 'Error retrieving Log_Feelings with ID ' + req.params.id,
         });

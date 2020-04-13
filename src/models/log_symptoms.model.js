@@ -24,10 +24,10 @@ Log_Symptoms.create = (newLog_Symptoms, result) => {
 
 Log_Symptoms.findByID = (Log_SymptomsId, result) => {
   sql.query(
-    `SELECT Log_Symptoms.User_ID, Log_Symptoms.Date, Log_Symptoms.Symptom_ID, Log_Symptoms.Symptom_Intensity, Symptoms.Display_Name
+    `SELECT Log_Symptoms.User_ID, Log_Symptoms.Date, Log_Symptoms.Symptom_ID, Log_Symptoms.Symptom_Intensity, Symptom.Display_Name
     FROM Log_Symptoms
-    JOIN Symptoms
-    ON Symptoms.ID = Log_Symptoms.Symptom_ID
+    JOIN Symptom
+    ON Symptom.ID = Log_Symptoms.Symptom_ID
     WHERE Log_Symptoms.User_ID = ?`,
     Log_SymptomsId,
     (err, res) => {

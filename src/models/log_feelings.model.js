@@ -24,10 +24,10 @@ Log_Feelings.create = (newLog_Feelings, result) => {
 
 Log_Feelings.findByID = (Log_FeelingsId, result) => {
   sql.query(
-    `SELECT Log_Feelings.User_ID, Log_Feelings.Date, Log_Feelings.Feeling_ID, Log_Feelings.Feeling_Intensity, Feelings.Display_Name
+    `SELECT Log_Feelings.User_ID, Log_Feelings.Date, Log_Feelings.Feeling_ID, Log_Feelings.Feeling_Intensity, Feeling.Display_Name
     FROM Log_Feelings
-    JOIN Feelings
-    ON Feelings.ID = Log_Feelings.Feeling_ID
+    JOIN Feeling
+    ON Feeling.ID = Log_Feelings.Feeling_ID
     WHERE Log_Feelings.User_ID = ?`,
     Log_FeelingsId,
     (err, res) => {
