@@ -11,7 +11,7 @@ module.exports = (app) => {
   app.get('/Log_Symptoms', Log_Symptoms.findAll);
 
   // Retrieve a single Customer with ID
-  app.get('/Log_Symptoms/:id', Log_Symptoms.findLog_Symptoms);
+  app.get('/Log_Symptoms/:id', Log_Symptoms.findByID);
 
   // Delete a Customer with ID
   app.delete('/Log_Symptoms/:id', Log_Symptoms.delete);

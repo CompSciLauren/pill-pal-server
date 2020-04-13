@@ -62,7 +62,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Log_Symptoms with a Email
 // Find requestes need to be surrounded by single tick 'email@gmail.com'
-exports.findLog_Symptoms = (req, res) => {
+exports.findByID = (req, res) => {
   Log_Symptoms.findByID(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === 'not_found') {
