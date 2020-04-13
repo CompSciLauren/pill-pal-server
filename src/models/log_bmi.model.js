@@ -36,8 +36,8 @@ LogEntry.getLog = (user_id, date, result) => {
       }
 
       if (res.length) {
-        console.log('found User: ', res[0]);
-        result(null, res[0]);
+        console.log('found User: ', res);
+        result(null, res);
         return;
       }
 

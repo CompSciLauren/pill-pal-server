@@ -34,8 +34,8 @@ Medication.findByID = (MedicationId, result) => {
       }
 
       if (res.length) {
-        console.log('found Medication: ', res[0]);
-        result(null, res[0]);
+        console.log('found Medication: ', res);
+        result(null, res);
         return;
       }
 
