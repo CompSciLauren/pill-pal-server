@@ -39,6 +39,27 @@ User.findByID = (UserId, result) => {
   });
 };
 
+User.findUserByLoginInfo = (Username, Password, result) => {
+  sql.query(
+    `SELECT ID FROM User WHERE Username = ? AND Password = ?`,
+    [Username, Password],
+    (err, res) => {
+      if (err) {
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        result(null, res);
+        return;
+      }
+
+      // not found User with the id
+      result({ kind: 'not_found' }, null);
+    }
+  );
+};
+
 User.getAll = (result) => {
   sql.query('SELECT * FROM User', (err, res) => {
     if (err) {

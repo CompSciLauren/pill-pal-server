@@ -67,6 +67,28 @@ exports.findUser = (req, res) => {
   });
 };
 
+// Find a single User with a Email
+// Find requestes need to be surrounded by single tick 'email@gmail.com'
+exports.findUserByLoginInfo = (req, res) => {
+  User.findUserByLoginInfo(
+    req.params.username,
+    req.params.password,
+    (err, data) => {
+      if (err) {
+        if (err.kind === 'not_found') {
+          res.status(404).send({
+            message: `No User found with given username and password.`,
+          });
+        } else {
+          res.status(500).send({
+            message: 'Error retrieving User with given username and password',
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
+
 // Delete a User with the specified ID in the request
 // Any deletion requests should not have any 'ticks' around email key
 exports.delete = (req, res) => {
