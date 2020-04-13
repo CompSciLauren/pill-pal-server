@@ -24,7 +24,11 @@ Takes.create = (newEntry, result) => {
 
 Takes.findByUser_ID = (UserId, result) => {
   sql.query(
-    `SELECT Display_Name FROM Medication WHERE ID IN ( SELECT Medication_ID FROM Takes WHERE User_ID = ?)`,
+    `SELECT Takes.User_ID, Takes.Medication_ID, Takes.Amount_Prescribed, Takes.Refills, Medication.Display_Name
+    FROM Takes
+    JOIN Medication
+    ON Medication.ID = Takes.Medication_ID
+    WHERE Takes.User_ID = ?`,
     UserId,
     (err, res) => {
       if (err) {
