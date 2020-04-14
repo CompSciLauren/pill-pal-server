@@ -11,11 +11,11 @@ module.exports = (app) => {
   app.get('/Log_Pills', Log_Pills.findAll);
 
   // Retrieve a single Customer with ID
-  app.get('/Log_Pills/:id', Log_Pills.findLog_Pills);
+  app.get('/Log_Pills/:user_id', Log_Pills.findLog_Pills);
 
   // Retrieve user's feelings for a specific day
-  app.get('/Log_Pills/:id/:date', Log_Pills.findByIDAndDate);
+  app.get('/Log_Pills/:user_id/:datetime', Log_Pills.findByIDAndDatetime);
 
   // Delete a Customer with ID
-  app.delete('/Log_Pills/:id', Log_Pills.delete);
+  app.delete('/Log_Pills/:user_id', Log_Pills.delete);
 };

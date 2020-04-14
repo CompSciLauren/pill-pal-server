@@ -74,10 +74,10 @@ exports.findLog_Pills = (req, res) => {
 
 // Find a single Log_Pills with a Email
 // Find requestes need to be surrounded by single tick 'email@gmail.com'
-exports.findByIDAndDate = (req, res) => {
-  Log_Pills.findByIDAndDate(
+exports.findByIDAndDatetime = (req, res) => {
+  Log_Pills.findByIDAndDatetime(
     req.params.user_id,
-    req.params.date,
+    req.params.datetime,
     (err, data) => {
       if (err) {
         if (err.kind === 'not_found') {
