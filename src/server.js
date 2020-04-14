@@ -23,6 +23,7 @@ require('./routes/feeling.routes.js')(app);
 require('./routes/log_symptoms.routes.js')(app);
 require('./routes/log_feelings.routes.js')(app);
 require('./routes/log_notes.routes.js')(app);
+require('./routes/log_pills.routes.js')(app);
 
 // set port, listen for requests
 app.listen(3000, () => {
