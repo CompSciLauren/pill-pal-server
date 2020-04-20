@@ -1,122 +1,100 @@
-// Model for Logs
-// Defines connection methods used for a LogEntry
+// Model for Log_BMI
+// Defines connection methods used for a Log_BMI
 
 const sql = require('./db.js');
 
 // constructor
-const LogEntry = function (entry) {
-  this.User_ID = entry.User_ID;
-  this.Date = entry.Date;
-  this.Height = entry.Height;
-  this.Weight = entry.Weight;
+const Log_BMI = function (log_bmi) {
+  this.User_ID = log_bmi.User_ID;
+  this.Date = log_bmi.Date;
+  this.Height = log_bmi.Height;
+  this.Weight = log_bmi.Weight;
 };
 
-LogEntry.create = (newLogEntry, result) => {
-  sql.query('INSERT INTO Log_BMI SET ?', newLogEntry, (err, res) => {
+Log_BMI.create = (newLog_Feelings, result) => {
+  sql.query('INSERT INTO Log_BMI SET ?', newLog_Feelings, (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(err, null);
       return;
     }
 
-    console.log('created Log: ', { id: res.insertId, ...newLogEntry });
-    result(null, { id: res.insertId, ...newLogEntry });
+    result(null, { id: res.insertId, ...newLog_Feelings });
   });
 };
 
-LogEntry.getLog = (user_id, date, result) => {
+Log_BMI.findByID = (Log_BMI_ID, result) => {
   sql.query(
-    `SELECT * FROM Log_BMI WHERE User_ID = ? AND Date = ?`,
-    [user_id, date],
+    `SELECT Log_BMI.User_ID, Log_BMI.Date, Log_BMI.Height, Log_BMI.Weight
+    FROM Log_BMI
+    WHERE Log_BMI.User_ID = ?`,
+    Log_BMI_ID,
     (err, res) => {
       if (err) {
-        console.log('error: ', err);
         result(err, null);
         return;
       }
 
       if (res.length) {
-        console.log('found User: ', res);
         result(null, res);
         return;
       }
 
-      // not found User with the id
+      // not found Log_BMI with the id
       result({ kind: 'not_found' }, null);
     }
   );
 };
 
-LogEntry.getAllLogs = (user_id, result) => {
-  sql.query(`SELECT * FROM Log_BMI WHERE User_ID = ?`, user_id, (err, res) => {
-    if (err) {
-      console.log('error: ', err);
-      result(null, err);
-      return;
-    }
-
-    console.log('Log: ', res);
-    result(null, res);
-  });
-};
-
-LogEntry.update = (user_id, date, newLog) => {
+Log_BMI.findByIDAndDate = (Log_BMI_ID, Log_BMI_Date, result) => {
   sql.query(
-    'UPDATE Log_BMI SET User_ID = ?, Date = ?, Height = ? WHERE User_ID = ? and Date = ?',
-    [newLog.User_ID, newLog.Date, newLog.Height, newLog.Weight, user_id, date],
+    `SELECT Log_BMI.User_ID, Log_BMI.Date, Log_BMI.Height, Log_BMI.Weight
+    FROM Log_BMI
+    WHERE Log_BMI.User_ID = ?
+    AND Log_BMI.Date = ?`,
+    [Log_BMI_ID, Log_BMI_Date],
     (err, res) => {
       if (err) {
-        console.log('error: ', err);
-        result(null, err);
+        result(err, null);
         return;
       }
 
-      if (res.affectedRows == 0) {
-        // not found Log with the user_id and date
-        result({ kind: 'not_found' }, null);
+      if (res.length) {
+        result(null, res);
         return;
       }
 
-      console.log('updated customer: ', { id: id, ...customer });
-      result(null, { id: id, ...customer });
+      // not found Log_BMI with the id
+      result({ kind: 'not_found' }, null);
     }
   );
 };
 
-LogEntry.remove = (user_id, date, result) => {
-  sql.query(
-    'DELETE FROM Log_BMI WHERE User_ID = ? AND Date = ?',
-    [user_id, date],
-    (err, res) => {
-      if (err) {
-        console.log('error: ', err);
-        result(null, err);
-        return;
-      }
-
-      if (res.affectedRows == 0) {
-        // not found Log with the user_id
-        result({ kind: 'not_found' }, null);
-        return;
-      }
-
-      console.log('Deleted Log with Email: ', user_id);
-      result(null, res);
-    }
-  );
-};
-
-LogEntry.getAll = (result) => {
+Log_BMI.getAll = (result) => {
   sql.query('SELECT * FROM Log_BMI', (err, res) => {
     if (err) {
-      console.log('error: ', err);
       result(null, err);
       return;
     }
 
-    console.log('User: ', res);
     result(null, res);
   });
 };
 
-module.exports = LogEntry;
+Log_BMI.remove = (id, result) => {
+  sql.query('DELETE FROM Log_BMI WHERE User_ID = ?', id, (err, res) => {
+    if (err) {
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows == 0) {
+      // not found Log_BMI with the id
+      result({ kind: 'not_found' }, null);
+      return;
+    }
+
+    result(null, res);
+  });
+};
+
+module.exports = Log_BMI;

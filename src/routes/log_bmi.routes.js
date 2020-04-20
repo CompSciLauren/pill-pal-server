@@ -4,20 +4,18 @@
 module.exports = (app) => {
   const Log_BMI = require('../controllers/log_bmi.controller.js');
 
-  // Create a new User
+  // Create a new Log_BMI
   app.post('/Log_BMI', Log_BMI.create);
 
+  // Retrieve all Log_Feelingss
   app.get('/Log_BMI', Log_BMI.findAll);
 
-  // Retrieve all Logs from User
-  app.get('/Log_BMI/:user_id', Log_BMI.getAllLogs);
+  // Retrieve a single Customer with ID
+  app.get('/Log_BMI/:id', Log_BMI.findLog_Feelings);
 
-  // Retrieve a single Log with user_id and date
-  app.get('Log_BMI/:user_id/:date', Log_BMI.getLog);
+  // Retrieve user's feelings for a specific day
+  app.get('/Log_BMI/:id/:date', Log_BMI.findByIDAndDate);
 
-  // Retrieve a single Log with user_id and date
-  app.put('/Log_BMI/:user_id/:date', Log_BMI.update);
-
-  // Delete a Log with user_id and date
-  app.delete('/Log_BMI/:user_id/:date', Log_BMI.delete);
+  // Delete a Customer with ID
+  app.delete('/Log_BMI/:id', Log_BMI.delete);
 };
