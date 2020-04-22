@@ -11,31 +11,13 @@ exports.create = (req, res) => {
       message: 'Content can not be empty!',
     });
   }
-  console.log(req.body);
-  // Create a Log_Symptoms
-  // JSON example of creating a log_symptoms
-  //  {
-  //   "ID": 0,
-  //   "Name": "Jeff Bean",
-  //   "Password": "secret",
-  //   "Phone_Number": 7775550000
-  //  }
 
   const log_symptoms = new Log_Symptoms({
-    ID: req.body.ID,
-    Email: req.body.Email,
-    Name: req.body.Name,
-    Password: req.body.Password,
-    Phone_Number: req.body.Phone_Number,
+    User_ID: req.body.User_ID,
+    Date: req.body.Date,
+    Symptom_ID: req.body.Symptom_ID,
+    Symptom_Intensity: req.body.Symptom_Intensity,
   });
-  console.log(
-    '%s,%s,%s,%s,%s',
-    log_symptoms.ID,
-    log_symptoms.Email,
-    log_symptoms.Name,
-    log_symptoms.Password,
-    log_symptoms.Phone_Number
-  );
 
   // Save Log_Symptoms in the database
   Log_Symptoms.create(log_symptoms, (err, data) => {

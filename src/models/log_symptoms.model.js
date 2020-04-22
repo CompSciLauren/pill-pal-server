@@ -5,10 +5,10 @@ const sql = require('./db.js');
 
 // constructor
 const Log_Symptoms = function (log_symptoms) {
-  this.ID = log_symptoms.ID;
-  this.Name = log_symptoms.Name;
-  this.Feelings_ID = log_symptoms.Feelings_ID;
-  this.Feelings_Intensity = log_symptoms.Feelings_Intensity;
+  this.User_ID = log_symptoms.User_ID;
+  this.Date = log_symptoms.Date;
+  this.Symptom_ID = log_symptoms.Symptom_ID;
+  this.Symptom_Intensity = log_symptoms.Symptom_Intensity;
 };
 
 Log_Symptoms.create = (newLog_Symptoms, result) => {
