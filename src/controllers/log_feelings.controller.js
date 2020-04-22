@@ -22,19 +22,17 @@ exports.create = (req, res) => {
   //  }
 
   const log_feelings = new Log_Feelings({
-    ID: req.body.ID,
-    Email: req.body.Email,
-    Name: req.body.Name,
-    Password: req.body.Password,
-    Phone_Number: req.body.Phone_Number,
+    User_ID: req.body.User_ID,
+    Date: req.body.Date,
+    Feeling_ID: req.body.Feeling_ID,
+    Feeling_Intensity: req.body.Feeling_Intensity,
   });
   console.log(
-    '%s,%s,%s,%s,%s',
-    log_feelings.ID,
-    log_feelings.Email,
-    log_feelings.Name,
-    log_feelings.Password,
-    log_feelings.Phone_Number
+    '%s,%s,%s,%s',
+    log_feelings.User_ID,
+    log_feelings.Date,
+    log_feelings.Feeling_ID,
+    log_feelings.Feeling_Intensity
   );
 
   // Save Log_Feelings in the database
