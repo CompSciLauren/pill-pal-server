@@ -9,6 +9,7 @@ const Takes = function (takes) {
   this.Medication_ID = takes.Medication_ID;
   this.Amount_Prescribed = takes.Amount_Prescribed;
   this.Refills = takes.Refills;
+  this.Display_Name = takes.Display_Name;
 };
 
 Takes.create = (newEntry, result) => {
@@ -22,10 +23,29 @@ Takes.create = (newEntry, result) => {
   });
 };
 
-Takes.updatePill = (amountPrescribed, refills, userID, result) => {
+Takes.updatePill = (
+  userID,
+  medicationID,
+  amountPrescribed,
+  refills,
+  displayName,
+  result
+) => {
+  console.log(
+    'user:',
+    userID,
+    'medID:',
+    medicationID,
+    'amount:',
+    amountPrescribed,
+    'refills:',
+    refills,
+    'disp:',
+    displayName
+  );
   sql.query(
     `UPDATE Takes SET Amount_Prescribed = ?, Refills = ? WHERE User_ID = ? AND Medication_ID = ?`,
-    [amountPrescribed, refills, userID],
+    [amountPrescribed, refills, userID, medicationID],
     (err, res) => {
       if (err) {
         result(err, null);
