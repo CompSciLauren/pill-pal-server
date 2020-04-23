@@ -9,7 +9,6 @@ const Takes = function (takes) {
   this.Medication_ID = takes.Medication_ID;
   this.Amount_Prescribed = takes.Amount_Prescribed;
   this.Refills = takes.Refills;
-  this.Display_Name = takes.Display_Name;
 };
 
 Takes.create = (newEntry, result) => {

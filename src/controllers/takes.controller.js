@@ -14,7 +14,6 @@ exports.create = (req, res) => {
     Medication_ID: req.body.Medication_ID,
     Amount_Prescribed: req.body.Amount_Prescribed,
     Refills: req.body.Refills,
-    Display_Name: req.body.Display_Name,
   });
 
   // Save User in the database
