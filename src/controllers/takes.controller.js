@@ -34,6 +34,22 @@ exports.create = (req, res) => {
   });
 };
 
+exports.updatePill = (req, res) => {
+  Takes.updatePill(req.params.user_id, (err, data) => {
+    if (err) {
+      if (err.kind === 'not_found') {
+        res.status(404).send({
+          message: `No User found with ID ${req.params.user_id}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: 'Error retrieving User with ID ' + req.params.user_id,
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // Find a single User's current medication via their user ID
 // Find requests need to be surrounded by single tick 'email@gmail.com'
 exports.findMedication = (req, res) => {

@@ -4,6 +4,9 @@ module.exports = (app) => {
   // Create a new Takes entry
   app.post('/Takes', Takes.create);
 
+  // Update a current Takes entry
+  app.post('/Takes/:user_id', Takes.updatePill);
+
   // Retrieve all Takes info
   app.get('/Takes', Takes.findAll);
 

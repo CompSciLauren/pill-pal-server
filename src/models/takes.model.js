@@ -22,6 +22,21 @@ Takes.create = (newEntry, result) => {
   });
 };
 
+Takes.updatePill = (amountPrescribed, refills, userID, result) => {
+  sql.query(
+    `UPDATE Takes SET Amount_Prescribed = ?, Refills = ? WHERE User_ID = ? AND Medication_ID = ?`,
+    [amountPrescribed, refills, userID],
+    (err, res) => {
+      if (err) {
+        result(err, null);
+        return;
+      }
+
+      result(null, res);
+    }
+  );
+};
+
 Takes.findByUser_ID = (UserId, result) => {
   sql.query(
     `SELECT Takes.User_ID, Takes.Medication_ID, Takes.Amount_Prescribed, Takes.Refills, Medication.Display_Name
