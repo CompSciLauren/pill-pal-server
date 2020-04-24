@@ -12,6 +12,32 @@ const Takes = function (takes) {
 };
 
 Takes.create = (newEntry, result) => {
+  if (newEntry.Medication_ID.includes('alexa')) {
+    switch (newEntry.Medication_ID) {
+      case 'alexaAdderall':
+        newEntry.Medication_ID = 0;
+        break;
+      case 'alexaBirth Control':
+        newEntry.Medication_ID = 1;
+        break;
+      case 'alexaHydrocodone':
+        newEntry.Medication_ID = 2;
+        break;
+      case 'alexaMeloxicam':
+        newEntry.Medication_ID = 3;
+        break;
+      case 'alexaMethadone':
+        newEntry.Medication_ID = 4;
+        break;
+      case 'alexaOpioid':
+        newEntry.Medication_ID = 5;
+        break;
+      case 'alexaOxycodone':
+        newEntry.Medication_ID = 6;
+        break;
+    }
+  }
+
   sql.query('INSERT INTO Takes SET ?', newEntry, (err, res) => {
     if (err) {
       result(err, null);
@@ -92,8 +118,35 @@ Takes.getAll = (result) => {
   });
 };
 
-Takes.remove = (user_id, medication_id, result) => {
-  let values = [user_id, medication_id];
+Takes.remove = (user_id, Medication_ID, result) => {
+  if (Medication_ID.includes('alexa')) {
+    switch (newEntry.Medication_ID) {
+      case 'alexaAdderall':
+        Medication_ID = 0;
+        break;
+      case 'alexaBirth Control':
+        Medication_ID = 1;
+        break;
+      case 'alexaHydrocodone':
+        Medication_ID = 2;
+        break;
+      case 'alexaMeloxicam':
+        Medication_ID = 3;
+        break;
+      case 'alexaMethadone':
+        Medication_ID = 4;
+        break;
+      case 'alexaOpioid':
+        Medication_ID = 5;
+        break;
+      case 'alexaOxycodone':
+        Medication_ID = 6;
+        break;
+    }
+  }
+
+  let values = [user_id, Medication_ID];
+
   sql.query(
     'DELETE FROM Takes WHERE User_ID = ? AND Medication_ID = ?',
     values,
