@@ -120,7 +120,7 @@ Takes.getAll = (result) => {
 
 Takes.remove = (user_id, Medication_ID, result) => {
   if (Medication_ID.includes('alexa')) {
-    switch (newEntry.Medication_ID) {
+    switch (Medication_ID) {
       case 'alexaAdderall':
         Medication_ID = 0;
         break;
