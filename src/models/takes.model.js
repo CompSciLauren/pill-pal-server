@@ -14,25 +14,25 @@ const Takes = function (takes) {
 Takes.create = (newEntry, result) => {
   if (newEntry.Medication_ID.includes('alexa')) {
     switch (newEntry.Medication_ID) {
-      case 'alexaAdderall':
+      case 'alexaadderall':
         newEntry.Medication_ID = 0;
         break;
-      case 'alexaBirth Control':
+      case 'alexabirth_control':
         newEntry.Medication_ID = 1;
         break;
-      case 'alexaHydrocodone':
+      case 'alexahydrocodone':
         newEntry.Medication_ID = 2;
         break;
-      case 'alexaMeloxicam':
+      case 'alexameloxicam':
         newEntry.Medication_ID = 3;
         break;
-      case 'alexaMethadone':
+      case 'alexamethadone':
         newEntry.Medication_ID = 4;
         break;
-      case 'alexaOpioid':
+      case 'alexaopioid':
         newEntry.Medication_ID = 5;
         break;
-      case 'alexaOxycodone':
+      case 'alexaoxycodone':
         newEntry.Medication_ID = 6;
         break;
     }
