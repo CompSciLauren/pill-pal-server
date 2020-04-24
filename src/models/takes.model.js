@@ -12,32 +12,6 @@ const Takes = function (takes) {
 };
 
 Takes.create = (newEntry, result) => {
-  if (newEntry.Medication_ID.includes('alexa')) {
-    switch (newEntry.Medication_ID) {
-      case 'alexaadderall':
-        newEntry.Medication_ID = 0;
-        break;
-      case 'alexabirth_control':
-        newEntry.Medication_ID = 1;
-        break;
-      case 'alexahydrocodone':
-        newEntry.Medication_ID = 2;
-        break;
-      case 'alexameloxicam':
-        newEntry.Medication_ID = 3;
-        break;
-      case 'alexamethadone':
-        newEntry.Medication_ID = 4;
-        break;
-      case 'alexaopioid':
-        newEntry.Medication_ID = 5;
-        break;
-      case 'alexaoxycodone':
-        newEntry.Medication_ID = 6;
-        break;
-    }
-  }
-
   sql.query('INSERT INTO Takes SET ?', newEntry, (err, res) => {
     if (err) {
       result(err, null);
